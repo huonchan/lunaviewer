@@ -66,8 +66,8 @@ namespace LunaViewer01
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top,
                     //Margin = new Thickness(10, 10, 0, 0),
-                    Width = 32,
-                    Height = 32
+                    //Width = 32,
+                    //Height = 32
                 };
 
                 {
@@ -92,6 +92,10 @@ namespace LunaViewer01
 
                         stackPnl.Children.Add(myCanvas);*/
 
+                        float n = inSource.PixelHeight > inSource.PixelWidth ? inSource.PixelHeight : inSource.PixelWidth;
+
+                        b.Width = inSource.PixelWidth / n * 32;
+                        b.Height = inSource.PixelHeight / n + 32;
                         b.Background = myImageBrush;
                     }
                     catch (Exception e)
@@ -104,10 +108,17 @@ namespace LunaViewer01
                 {
                     // UIスレッドで行う例
                     var inSource = new BitmapImage();
+                    
                     inSource.BeginInit();
                     inSource.UriSource = new Uri("file:///" + fles);
                     inSource.EndInit();
                     MainImage.Source = inSource;
+                    MainImage.Width = inSource.PixelWidth;
+                    MainImage.Height = inSource.PixelHeight;
+
+                    label_WidthNum.Content = inSource.PixelWidth;
+                    label_HeightNum.Content = inSource.PixelHeight;
+
 
                     ToggleButton cButton = s as ToggleButton;
 
@@ -130,6 +141,9 @@ namespace LunaViewer01
 
 
         }
+
+        //https://www.c-sharpcorner.com/forums/scroll-a-view-horizontally-using-the-mouse-wheel-in-wpf
+        //todo:https://stackoverflow.com/questions/3727439/how-to-enable-horizontal-scrolling-with-mouse が使えるか確かめる
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon001.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -98,6 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Xaml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon001.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

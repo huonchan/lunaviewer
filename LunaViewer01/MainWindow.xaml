@@ -9,12 +9,14 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
+
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
@@ -94,18 +96,32 @@
         </ScrollViewer>
 
 
-        <Viewbox
+        <ScrollViewer
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            HorizontalScrollBarVisibility="auto"
+            VerticalScrollBarVisibility="auto">
             <Image
                 x:Name="MainImage"
                 Width="auto"
                 Height="auto"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" />
-        </Viewbox>
+        </ScrollViewer>
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal">
+            <Label Content="WIDTH:" />
+            <Label Name="label_WidthNum" Content="9999" />
+            <Label Content="Height:" />
+            <Label Name="label_HeightNum" Content="9999" />
+
+        </StackPanel>
 
     </Grid>
 </Window>
