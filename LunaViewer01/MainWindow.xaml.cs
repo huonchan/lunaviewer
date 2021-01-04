@@ -52,11 +52,13 @@ namespace LunaViewer01
             @"C:/Users/h/Desktop/FIles/picture/城ケ崎姫子", "*", System.IO.SearchOption.AllDirectories);*/
 
             string[] files = System.IO.Directory.GetFiles(
-            string.Format(@"{0}",DummyRootDirectory), "*", System.IO.SearchOption.AllDirectories);
-
-            foreach ( string fles in files)
+            string.Format(@"{0}", DummyRootDirectory), "*", System.IO.SearchOption.AllDirectories);
+            int cnt = 0;
+            foreach (string fles in files)
             {
-                if(fles.IndexOf(".db") != -1 ){ continue; }
+
+                //if (cnt++ > 10) { break; }
+                if (fles.IndexOf(".db") != -1) { continue; }
 
                 var b = new ToggleButton
                 {
@@ -69,12 +71,12 @@ namespace LunaViewer01
                 };
 
                 {
-                    StackPanel stackPnl = new StackPanel();
+                    /*StackPanel stackPnl = new StackPanel();
                     stackPnl.Orientation = Orientation.Horizontal;
-                    stackPnl.Margin = new Thickness(10);
+                    stackPnl.Margin = new Thickness(10);*/
 
                     try
-                    { 
+                    {
                         var inSource = new BitmapImage();
                         inSource.BeginInit();
                         inSource.UriSource = new Uri("file:///" + fles);
@@ -91,9 +93,10 @@ namespace LunaViewer01
                         stackPnl.Children.Add(myCanvas);*/
 
                         b.Background = myImageBrush;
-                    }catch( Exception e )
+                    }
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Error:"+ fles);
+                        Console.WriteLine("Error:" + fles);
                     }
                 }
 
@@ -102,13 +105,13 @@ namespace LunaViewer01
                     // UIスレッドで行う例
                     var inSource = new BitmapImage();
                     inSource.BeginInit();
-                    inSource.UriSource = new Uri("file:///"+ fles);
+                    inSource.UriSource = new Uri("file:///" + fles);
                     inSource.EndInit();
                     MainImage.Source = inSource;
 
                     ToggleButton cButton = s as ToggleButton;
 
-                    if ( null != currentButton)
+                    if (null != currentButton)
                     {
                         currentButton.IsChecked = false;
 
@@ -127,5 +130,19 @@ namespace LunaViewer01
 
 
         }
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                if (e.Delta > 0)
+                    dummyScroll.PageLeft();
+                else
+                    dummyScroll.PageRight();
+                e.Handled = true;
+            }
+        }
+
     }
+
+
 }
