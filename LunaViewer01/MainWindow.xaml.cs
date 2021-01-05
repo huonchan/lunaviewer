@@ -23,6 +23,8 @@ namespace LunaViewer01
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private double zoomValue = 1.0;
         ToggleButton currentButton;
 
         string DummyRootDirectory = "C:/Users/h/Desktop/FIles/picture/城ケ崎姫子";
@@ -92,10 +94,13 @@ namespace LunaViewer01
 
                         stackPnl.Children.Add(myCanvas);*/
 
-                        float n = inSource.PixelHeight > inSource.PixelWidth ? inSource.PixelHeight : inSource.PixelWidth;
+                        //float n = inSource.PixelHeight > inSource.PixelWidth ? inSource.PixelHeight : inSource.PixelWidth;
 
-                        b.Width = inSource.PixelWidth / n * 32;
-                        b.Height = inSource.PixelHeight / n + 32;
+                        //b.Width = inSource.PixelWidth / n * 32;
+                        //b.Height = inSource.PixelHeight / n + 32;
+                        b.Width = 32;
+                        b.Height = 32;
+                        
                         b.Background = myImageBrush;
                     }
                     catch (Exception e)
@@ -113,8 +118,8 @@ namespace LunaViewer01
                     inSource.UriSource = new Uri("file:///" + fles);
                     inSource.EndInit();
                     MainImage.Source = inSource;
-                    MainImage.Width = inSource.PixelWidth;
-                    MainImage.Height = inSource.PixelHeight;
+                    MainImage.Width = inSource.PixelWidth;// * 2;
+                    MainImage.Height = inSource.PixelHeight;// * 2;
 
                     label_WidthNum.Content = inSource.PixelWidth;
                     label_HeightNum.Content = inSource.PixelHeight;
@@ -130,6 +135,11 @@ namespace LunaViewer01
 
                     cButton.IsChecked = true;
                     currentButton = cButton;
+
+                    zoomValue = 1.0f;
+
+                    ScaleTransform scale = new ScaleTransform(zoomValue, zoomValue);
+                    MainImage.LayoutTransform = scale;
 
                     //MessageBox.Show(fles);
 
@@ -154,6 +164,27 @@ namespace LunaViewer01
                     dummyScroll.PageRight();
                 e.Handled = true;
             }
+        }
+
+        private void scrollviewer_image_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                if (e.Delta > 0)
+                {
+
+                    zoomValue += 0.1;
+                }
+
+                else
+                {
+                    zoomValue -= 0.1;
+                }
+
+            }
+
+            ScaleTransform scale = new ScaleTransform(zoomValue, zoomValue);
+            MainImage.LayoutTransform = scale;
         }
 
     }

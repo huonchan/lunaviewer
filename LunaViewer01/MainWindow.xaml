@@ -102,13 +102,15 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             HorizontalScrollBarVisibility="auto"
+            PreviewMouseWheel="scrollviewer_image_PreviewMouseWheel"
             VerticalScrollBarVisibility="auto">
             <Image
                 x:Name="MainImage"
                 Width="auto"
                 Height="auto"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top" />
+                VerticalAlignment="Top"
+                Cursor="Hand" />
         </ScrollViewer>
 
         <StackPanel
