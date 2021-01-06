@@ -48,6 +48,7 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
+            PreviewMouseWheel="dummyScroll_PreviewMouseWheel"
             HorizontalScrollBarVisibility="auto"
             VerticalScrollBarVisibility="auto">
             <StackPanel
@@ -99,7 +100,8 @@
         <ScrollViewer
             x:Name="scrollViewer"
             Grid.Row="1"
-            Grid.Column="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             HorizontalScrollBarVisibility="auto"

@@ -197,7 +197,7 @@ namespace LunaViewer01
 
             if ((Keyboard.Modifiers & ModifierKeys.Control) <= 0)
             {
-                return;
+                //return;
             }
 
             // 後続のイベントを実行しないための処理
@@ -269,6 +269,22 @@ namespace LunaViewer01
         private void scrollViewer_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             scrollViewer.ReleaseMouseCapture();
+
+
+        }
+
+        //https://www.c-sharpcorner.com/forums/scroll-a-view-horizontally-using-the-mouse-wheel-in-wpf
+        //todo:https://stackoverflow.com/questions/3727439/how-to-enable-horizontal-scrolling-with-mouse が使えるか確かめる
+        private void dummyScroll_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            //if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                if (e.Delta > 0)
+                    dummyScroll.PageLeft();
+                else
+                    dummyScroll.PageRight();
+                e.Handled = true;
+            }
         }
 
     }
